@@ -161,6 +161,12 @@ namespace RobotLocalization
     Eigen::MatrixXd hphrInv  = (stateToMeasurementSubset * pht + measurementCovarianceSubset).inverse();
     kalmanGainSubset.noalias() = pht * hphrInv;
 
+    FB_DEBUG("Estimate Error Covariance:\n" << estimateErrorCovariance_ <<
+             "\nPHT\n" << pht <<
+             "\nHPHRINV:\n" << hphrInv << "\n");
+
+    //FB_DEBUG("ARARMAX: " << kalmanGainSubset);
+
     innovationSubset = (measurementSubset - stateSubset);
 
     // Wrap angles in the innovation
